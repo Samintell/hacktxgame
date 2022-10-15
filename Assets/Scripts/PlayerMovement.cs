@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private float playerSpeed = 5.0f;
     [SerializeField] private float jumpPower = 5.0f;
+    [SerializeField] private boolean forceRight = true;
     
     private Rigidbody2D _playerRigidbody;
     private void Start()
@@ -26,8 +27,13 @@ public class PlayerMovement : MonoBehaviour
     }
     private void MovePlayer()
     {
-        var horizontalInput = Input.GetAxisRaw("Horizontal");
-        _playerRigidbody.velocity = new Vector2(horizontalInput * playerSpeed, _playerRigidbody.velocity.y);
+        if (forceRight) {
+            _playerRigidbody.velocity = new Vector2(playerSpeed, _playerRigidbody.velocity.y);
+        } else {
+            var horizontalInput = Input.GetAxisRaw("Horizontal");
+            _playerRigidbody.velocity = new Vector2(horizontalInput * playerSpeed, _playerRigidbody.velocity.y);
+        }
+        
     }
     private void Jump() => _playerRigidbody.velocity = new Vector2( 0, jumpPower);
 
