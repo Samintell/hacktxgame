@@ -16,14 +16,24 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.LogError("Player is missing a Rigidbody2D component");
         }
+
     }
     private void Update()
     {
         MovePlayer();
 
-        if (Input.GetButton("Jump") && _playerRigidbody.velocity.y == 0)
+        if (Input.GetButton("Jump") && _playerRigidbody.velocity.y == 0){
             Jump();
     }
+        /*if(OnCollisionEnter(death)){
+            Destroy(_playerRigidbody);
+        }*/
+    }
+
+    /*private bool OnCollisionEnter(Collision DeathPlane){
+        return _playerRigidbody.position.y > DeathPlane + 0.1;
+    }*/
+
     private void MovePlayer()
     {
         var horizontalInput = Input.GetAxisRaw("Horizontal");
